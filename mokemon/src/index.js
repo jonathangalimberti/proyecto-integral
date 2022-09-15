@@ -16,26 +16,52 @@ function seleccionMascotaJugador(){
     
     if(hipodoge){
         spanMascotaJugador.innerHTML = 'Hipodoge'
-        return alert("seleccionaste a Hipodoge")
+         alert("seleccionaste a Hipodoge")
     }else if (capipepo){
         spanMascotaJugador.innerHTML = 'Capipepo'
-        return alert("seleccionaste a capipepo")
+         alert("seleccionaste a capipepo")
     }else if (ratigueya){
         spanMascotaJugador.innerHTML = 'Ratigueya'
-        return alert("seleccionaste a ratigueya")
+         alert("seleccionaste a ratigueya")
     }else if (langostelvis){
         spanMascotaJugador.innerHTML = 'Langostelvis'
-        return alert("seleccionaste a langostelvis")
+         alert("seleccionaste a langostelvis")
     }else if (tucapalma){
         spanMascotaJugador.innerHTML = 'Tucapalma'
-        return alert("seleccionaste a tucapalma")
+         alert("seleccionaste a tucapalma")
     }else if (pydos){
         spanMascotaJugador.innerHTML = 'Pydos'
-        return alert("seleccionaste a pyros")
+         alert("seleccionaste a pyros")
     }else {
         alert("debes seleccionar una mascota")
     }
+    seleccionarMascotaEnemigo()
+}
+function seleccionarMascotaEnemigo(){
+    let mascotaEnemigo = aleatorio(1,6)
+
+    let spanMascotaEnemigo = document.getElementById('mascota-enemigo')
     
+    if(mascotaEnemigo == 1){
+        spanMascotaEnemigo.innerHTML = 'Hipodoge'
+    }else if (mascotaEnemigo ==2){
+        spanMascotaEnemigo.innerHTML = 'Capipepo'
+    }else if (mascotaEnemigo == 3){
+        spanMascotaEnemigo.innerHTML = 'Ratigueya'
+    }else if (mascotaEnemigo == 4){
+        spanMascotaEnemigo.innerHTML = 'Langostelvis'
+    }else if (mascotaEnemigo==5){
+        spanMascotaEnemigo.innerHTML = 'Tucapalma'
+    }else if (mascotaEnemigo ==6 ){
+        spanMascotaEnemigo.innerHTML = 'Pydos'
+    }else {
+        alert("Tu enemigo aun no selecciono una mascota")
+    }
+
+}
+
+function aleatorio (min,max){
+    return Math.floor(Math.random()*(max-min+1)+1)
 }
 
 window.addEventListener("load",iniciarJuego)
