@@ -1,5 +1,6 @@
 let ataqueJugador;
 let ataqueEnemigo;
+let resultado;
 
 function iniciarJuego(){
 
@@ -94,6 +95,27 @@ function ataqueAleatorioEnemigo(){
     }else {
         ataqueEnemigo ="TIERRA"
     }
+    resultadoCombate()
+    crearMensaje()
+}
+function resultadoCombate(){
+    if (ataqueJugador == "FUEGO" && ataqueEnemigo == "TIERRA" || ataqueJugador == "AGUA" && ataqueEnemigo=="FUEGO" || ataqueJugador == "TIERRA" && ataqueEnemigo=="AGUA"){
+        resultado= "GANASTE!! 😁";
+    }else if (ataqueJugador == ataqueEnemigo){
+        resultado= "empate";
+    }else {
+        resultado= "perdiste 😢";
+
+    }
+}
+
+function crearMensaje(){
+    let sectionMensajes= document.getElementById("mensajes")
+
+    let parrafo = document.createElement("p")
+    parrafo.innerHTML = 'atacaste con '+ataqueJugador + ", tu enemigo atacon con "+  ataqueEnemigo + " "+resultado
+
+    sectionMensajes.appendChild(parrafo)
 }
 
 window.addEventListener("load",iniciarJuego)
