@@ -1,9 +1,13 @@
 let ataqueJugador;
 let ataqueEnemigo;
 let resultado;
+let contadorJugador =3;
+let contadorEnemigo =3;
 
 function iniciarJuego(){
-
+    
+    let reiniciar=document.getElementById("boton-reiniciar")
+    reiniciar.addEventListener("click",botonReiniciar)
     let botonMascotaJugador= document.getElementById("boton-mascota")
     botonMascotaJugador.addEventListener("click",seleccionMascotaJugador)
     let ataqueFuego = document.getElementById("boton-fuego")
@@ -116,6 +120,48 @@ function crearMensaje(){
     parrafo.innerHTML = 'atacaste con '+ataqueJugador + ", tu enemigo atacon con "+  ataqueEnemigo + " "+resultado
 
     sectionMensajes.appendChild(parrafo)
+
+    contadorVidas()
+}
+
+function contadorVidas(){
+    let vidasJugador = document.getElementById("vidas-jugador")
+    let vidasEnemigo = document.getElementById("vidas-enemigo")
+
+    if (resultado== "GANASTE!! 😁" ){
+        contadorEnemigo= contadorEnemigo-1
+        vidasJugador.innerHTML = contadorJugador
+        vidasEnemigo.innerHTML = contadorEnemigo
+    }else if (resultado== "perdiste 😢" ){
+        contadorJugador= contadorJugador-1
+        vidasJugador.innerHTML = contadorJugador
+        vidasEnemigo.innerHTML = contadorEnemigo
+    }
+    finBatalla()
+}
+
+function finBatalla(){
+    if (contadorEnemigo == 0){
+        alert("ganaste la partida")
+       dehabilitarBotones()
+        
+    }else if(contadorJugador == 0){
+        alert("perdiste la partida, vuelve a iniciar")
+       dehabilitarBotones()
+    }
+}
+function dehabilitarBotones(){
+    let ataqueFuego = document.getElementById("boton-fuego")
+    ataqueFuego.disabled = true
+    let ataqueAgua= document.getElementById("boton-agua")
+    ataqueAgua.disabled = true
+    let ataqueTierra= document.getElementById("boton-tierra")
+    ataqueTierra.disabled = true   
+}
+
+function botonReiniciar(){
+   location.reload()
+    
 }
 
 window.addEventListener("load",iniciarJuego)
