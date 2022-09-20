@@ -5,6 +5,12 @@ let contadorJugador =3;
 let contadorEnemigo =3;
 
 function iniciarJuego(){
+
+    let sectionAtaques = document.getElementById("seleccionar-ataque")
+    sectionAtaques.style.display = "none"
+    let sectionReiniciar = document.getElementById("reiniciar")
+    sectionReiniciar.style.display = "none"
+
     
     let reiniciar=document.getElementById("boton-reiniciar")
     reiniciar.addEventListener("click",botonReiniciar)
@@ -19,6 +25,11 @@ function iniciarJuego(){
 }
 
 function seleccionMascotaJugador(){
+    let sectionAtaques = document.getElementById("seleccionar-ataque")
+    sectionAtaques.style.display = "block"
+    let sectionMascotas = document.getElementById("seleccionar-mascota")
+    sectionMascotas.style.display = "none"
+
     let hipodoge= document.getElementById("hipodoge").checked
     let capipepo= document.getElementById("capipepo").checked
     let ratigueya= document.getElementById("ratigueya").checked
@@ -117,7 +128,7 @@ function crearMensaje(){
     let sectionMensajes= document.getElementById("mensajes")
 
     let parrafo = document.createElement("p")
-    parrafo.innerHTML = 'atacaste con '+ataqueJugador + ", tu enemigo atacon con "+  ataqueEnemigo + " "+resultado
+    parrafo.innerHTML = 'atacaste con '+ataqueJugador + ", tu enemigo ataco con "+  ataqueEnemigo + " "+resultado
 
     sectionMensajes.appendChild(parrafo)
 
@@ -143,11 +154,15 @@ function contadorVidas(){
 function finBatalla(){
     if (contadorEnemigo == 0){
         alert("ganaste la partida")
-       dehabilitarBotones()
+        dehabilitarBotones()
+        let sectionReiniciar = document.getElementById("reiniciar")
+        sectionReiniciar.style.display = "block"
         
     }else if(contadorJugador == 0){
         alert("perdiste la partida, vuelve a iniciar")
        dehabilitarBotones()
+       let sectionReiniciar = document.getElementById("reiniciar")
+        sectionReiniciar.style.display = "block"
     }
 }
 function dehabilitarBotones(){
