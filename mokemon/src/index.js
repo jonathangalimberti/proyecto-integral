@@ -41,22 +41,16 @@ function seleccionMascotaJugador(){
     
     if(hipodoge){
         spanMascotaJugador.innerHTML = 'Hipodoge'
-         alert("seleccionaste a Hipodoge")
     }else if (capipepo){
         spanMascotaJugador.innerHTML = 'Capipepo'
-         alert("seleccionaste a capipepo")
     }else if (ratigueya){
         spanMascotaJugador.innerHTML = 'Ratigueya'
-         alert("seleccionaste a ratigueya")
     }else if (langostelvis){
         spanMascotaJugador.innerHTML = 'Langostelvis'
-         alert("seleccionaste a langostelvis")
     }else if (tucapalma){
         spanMascotaJugador.innerHTML = 'Tucapalma'
-         alert("seleccionaste a tucapalma")
     }else if (pydos){
         spanMascotaJugador.innerHTML = 'Pydos'
-         alert("seleccionaste a pyros")
     }else {
         alert("debes seleccionar una mascota")
     }
