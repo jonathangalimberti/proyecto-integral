@@ -10,7 +10,6 @@ function iniciarJuego(){
     sectionAtaques.style.display = "none"
     let sectionReiniciar = document.getElementById("reiniciar")
     sectionReiniciar.style.display = "none"
-
     
     let reiniciar=document.getElementById("boton-reiniciar")
     reiniciar.addEventListener("click",botonReiniciar)
@@ -26,7 +25,7 @@ function iniciarJuego(){
 
 function seleccionMascotaJugador(){
     let sectionAtaques = document.getElementById("seleccionar-ataque")
-    sectionAtaques.style.display = "block"
+    sectionAtaques.style.display = ""
     let sectionMascotas = document.getElementById("seleccionar-mascota")
     sectionMascotas.style.display = "none"
 
@@ -119,12 +118,19 @@ function resultadoCombate(){
 }
 
 function crearMensaje(){
-    let sectionMensajes= document.getElementById("mensajes")
+    let sectionResultado= document.getElementById("resultado")
+    let sectionAtaqueJugador= document.getElementById("ataques-del-jugador")
+    let sectionAtaqueEnemigo= document.getElementById("ataques-del-enemigo")
 
-    let parrafo = document.createElement("p")
-    parrafo.innerHTML = 'atacaste con '+ataqueJugador + ", tu enemigo ataco con "+  ataqueEnemigo + " "+resultado
+    let nuevoAtaqueJugador = document.createElement("p")
+    let nuevoAtaqueEnemigo = document.createElement("p")
 
-    sectionMensajes.appendChild(parrafo)
+    sectionResultado.innerHTML = resultado
+    nuevoAtaqueJugador.innerHTML = ataqueJugador
+    nuevoAtaqueEnemigo.innerHTML = ataqueEnemigo
+
+    sectionAtaqueJugador.appendChild(nuevoAtaqueJugador)
+    sectionAtaqueEnemigo.appendChild(nuevoAtaqueEnemigo)
 
     contadorVidas()
 }
@@ -146,17 +152,19 @@ function contadorVidas(){
 }
 
 function finBatalla(){
+    let sectionMensajes = document.getElementById("resultado")
+    
     if (contadorEnemigo == 0){
-        alert("ganaste la partida")
+        sectionMensajes.innerHTML ="Ganaste la partida"
         dehabilitarBotones()
         let sectionReiniciar = document.getElementById("reiniciar")
-        sectionReiniciar.style.display = "block"
+        sectionReiniciar.style.display = ""
         
     }else if(contadorJugador == 0){
-        alert("perdiste la partida, vuelve a iniciar")
+       sectionMensajes.innerHTML="Perdiste la partida, vuelve a iniciar"
        dehabilitarBotones()
        let sectionReiniciar = document.getElementById("reiniciar")
-        sectionReiniciar.style.display = "block"
+        sectionReiniciar.style.display = ""
     }
 }
 function dehabilitarBotones(){
