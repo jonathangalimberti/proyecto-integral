@@ -48,7 +48,7 @@ class Mokepon{
     }
 }
 
-let hipodoge = new Mokepon("Hipodoge",'/assets/mokepons_mokepon_hipodoge_attack.webp',5)
+let hipodoge = new Mokepon('Hipodoge','/assets/mokepons_mokepon_hipodoge_attack.webp',5)
 let capipepo = new Mokepon('Capipepo','/assets/mokepons_mokepon_capipepo_attack.webp',5)
 let ratigueya = new Mokepon('Ratigueya','/assets/mokepons_mokepon_ratigueya_attack.webp',5)
 
@@ -118,7 +118,7 @@ function seleccionMascotaJugador(){
     }else if (inputRatigueya.checked){
         spanMascotaJugador.innerHTML = inputRatigueya.id
         mascotaJugador = inputRatigueya.id
-    }else if (inputLangostelvis.checked){
+ /*    }else if (inputLangostelvis.checked){
         spanMascotaJugador.innerHTML = inputLangostelvis.id
         mascotaJugador = inputLangostelvis.id
     }else if (inputTucapalma.checked){
@@ -126,12 +126,12 @@ function seleccionMascotaJugador(){
         mascotaJugador = inputTucapalma.id
     }else if (inputPydos.checked){
         spanMascotaJugador.innerHTML = inputPydos.id
-        mascotaJugador = inputPydos.id
+        mascotaJugador = inputPydos.id */
     }else {
        alert("debes seleccionar una mascota")
     }
-    extraerAtaques(mascotaJugador)
     seleccionarMascotaEnemigo()
+    extraerAtaques(mascotaJugador)
     
 }
 
@@ -153,18 +153,18 @@ function mostrarAtaques(ataques){
 
         contenedorAtaques.innerHTML += opcionesDeAtaques
 
-         ataqueFuego = document.getElementById("boton-fuego")
-         ataqueAgua= document.getElementById("boton-agua")
-         ataqueTierra= document.getElementById("boton-tierra")
-
+        
     })
+    ataqueFuego = document.getElementById("boton-fuego")
+    ataqueAgua= document.getElementById("boton-agua")
+    ataqueTierra= document.getElementById("boton-tierra")
     ataqueFuego.addEventListener("click",ataqueDeFuego)
     ataqueAgua.addEventListener("click",ataqueDeAgua)
     ataqueTierra.addEventListener("click",ataqueDeTierra)
 }
 
 function seleccionarMascotaEnemigo(){
-    let mascotaEnemigo = aleatorio(0, mokepones.length-1)
+    let mascotaEnemigo = aleatorio(0, (mokepones.length-1))
 
         spanMascotaEnemigo.innerHTML = mokepones[mascotaEnemigo].nombre
 
@@ -186,13 +186,10 @@ function ataqueDeTierra(){
     ataqueAleatorioEnemigo()
 }
 
-function aleatorio (min,max){
-    return Math.floor(Math.random()*(max-min+1)+1)
-}
 
 function ataqueAleatorioEnemigo(){
     let eleccionEnemigo= aleatorio(1,3)
-
+    
     if(eleccionEnemigo == 1){
         ataqueEnemigo = "FUEGO"
     }else if (eleccionEnemigo == 2){
@@ -216,14 +213,14 @@ function resultadoCombate(){
 function crearMensaje(){
     let nuevoAtaqueJugador = document.createElement("p")
     let nuevoAtaqueEnemigo = document.createElement("p")
-
+    
     sectionResultado.innerHTML = resultado
     nuevoAtaqueJugador.innerHTML = ataqueJugador
     nuevoAtaqueEnemigo.innerHTML = ataqueEnemigo
 
     sectionAtaqueJugador.appendChild(nuevoAtaqueJugador)
     sectionAtaqueEnemigo.appendChild(nuevoAtaqueEnemigo)
-
+    
     contadorVidas()
 }
 
@@ -247,8 +244,8 @@ function finBatalla(){
         sectionReiniciar.style.display = ""
         
     }else if(contadorJugador == 0){
-       sectionMensajes.innerHTML="Perdiste la partida, vuelve a iniciar"
-       dehabilitarBotones()
+        sectionMensajes.innerHTML="Perdiste la partida, vuelve a iniciar"
+        dehabilitarBotones()
         sectionReiniciar.style.display = ""
     }
 }
@@ -259,7 +256,10 @@ function dehabilitarBotones(){
 }
 
 function botonReiniciar(){
-   location.reload()
+    location.reload()
+}
+function aleatorio (min,max){
+    return Math.floor(Math.random()*(max-min+1))
 }
 
 window.addEventListener("load",iniciarJuego)
