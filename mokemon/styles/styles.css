@@ -115,7 +115,7 @@ body{
 }
 .ataques{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin: 20px;
     gap: 10px;
 }
@@ -127,6 +127,12 @@ body{
 
 #vidas-jugador, #vidas-enemigo{
     text-align: center;
+}
+
+#resultado{
+    background: lightblue;
+    padding: 20px;
+    border-radius: 20px;
 }
 
 .padre-ataques{
