@@ -80,7 +80,8 @@ ratigueya.ataques.push(
     {nombre: '🔥 FUEGO', id:'boton-fuego'},
     {nombre: '🔥 FUEGO', id:'boton-fuego'},
     {nombre: '💧 AGUA', id:'boton-agua'},
-    {nombre: '🪴 TIERRA', id:'boton-tierra'},)
+    {nombre: '🪴 TIERRA', id:'boton-tierra'},
+    )
 langostelvis.ataques.push(
     {nombre: '💧 AGUA', id:'boton-agua'},
     {nombre: '💧 AGUA', id:'boton-agua'},
