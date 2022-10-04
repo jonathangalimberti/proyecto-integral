@@ -55,8 +55,11 @@ class Mokepon{
 let hipodoge = new Mokepon('Hipodoge','/assets/mokepons_mokepon_hipodoge_attack.webp',5)
 let capipepo = new Mokepon('Capipepo','/assets/mokepons_mokepon_capipepo_attack.webp',5)
 let ratigueya = new Mokepon('Ratigueya','/assets/mokepons_mokepon_ratigueya_attack.webp',5)
+let langostelvis = new Mokepon('Langostelvis','/assets/mokepons_mokepon_langostelvis_attack.webp',5)
+let tucapalma = new Mokepon('Tucapalma','/assets/mokepons_mokepon_tucapalma_attack.webp',5)
+let pydos = new Mokepon('Pydos','/assets/mokepons_mokepon_pydos_attack.webp',5)
 
-mokepones.push(hipodoge,capipepo,ratigueya) 
+mokepones.push(hipodoge,capipepo,ratigueya,langostelvis,tucapalma,pydos) 
 
 hipodoge.ataques.push(
     {nombre: '💧 AGUA', id:'boton-agua'},
@@ -73,6 +76,26 @@ capipepo.ataques.push(
     {nombre: '🔥 FUEGO', id:'boton-fuego'},
     )
 ratigueya.ataques.push(
+    {nombre: '🔥 FUEGO', id:'boton-fuego'},
+    {nombre: '🔥 FUEGO', id:'boton-fuego'},
+    {nombre: '🔥 FUEGO', id:'boton-fuego'},
+    {nombre: '💧 AGUA', id:'boton-agua'},
+    {nombre: '🪴 TIERRA', id:'boton-tierra'},)
+langostelvis.ataques.push(
+    {nombre: '💧 AGUA', id:'boton-agua'},
+    {nombre: '💧 AGUA', id:'boton-agua'},
+    {nombre: '💧 AGUA', id:'boton-agua'},
+    {nombre: '🔥 FUEGO', id:'boton-fuego'},
+    {nombre: '🪴 TIERRA', id:'boton-tierra'},
+    )
+tucapalma.ataques.push(
+    {nombre: '🪴 TIERRA', id:'boton-tierra'},
+    {nombre: '🪴 TIERRA', id:'boton-tierra'},
+    {nombre: '🪴 TIERRA', id:'boton-tierra'},
+    {nombre: '💧 AGUA', id:'boton-agua'},
+    {nombre: '🔥 FUEGO', id:'boton-fuego'},
+    )
+pydos.ataques.push(
     {nombre: '🔥 FUEGO', id:'boton-fuego'},
     {nombre: '🔥 FUEGO', id:'boton-fuego'},
     {nombre: '🔥 FUEGO', id:'boton-fuego'},
@@ -121,10 +144,17 @@ function seleccionMascotaJugador(){
     }else if (inputCapipepo.checked){
         spanMascotaJugador.innerHTML = inputCapipepo.id
         mascotaJugador = inputCapipepo.id
-    }else if (inputRatigueya.checked){
-        spanMascotaJugador.innerHTML = inputRatigueya.id
-        mascotaJugador = inputRatigueya.id
-    }else {
+    }else if (inputLangostelvis.checked){
+        spanMascotaJugador.innerHTML = inputLangostelvis.id
+        mascotaJugador = inputLangostelvis.id
+    }else if (inputTucapalma.checked){
+        spanMascotaJugador.innerHTML = inputTucapalma.id
+        mascotaJugador = inputTucapalma.id
+    }else if (inputPydos.checked){
+        spanMascotaJugador.innerHTML = inputPydos.id
+        mascotaJugador = inputPydos.id
+    }
+    else {
        alert("debes seleccionar una mascota")
     }
     seleccionarMascotaEnemigo()
