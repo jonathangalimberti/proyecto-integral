@@ -22,6 +22,9 @@ const contenedorAtaques = document.getElementById("ataques-jugador")
 const mensajesFinales = document.getElementById("mensajes")
 const subtitulos= document.getElementById('subtitulos')
 
+const sectionVerMapa = document.getElementById('ver-mapa')
+const mapa = document.getElementById('mapa')
+
 let ataqueFuego
 let ataqueAgua
 let ataqueTierra
@@ -42,13 +45,22 @@ let botones = []
 let contadorJugador =0
 let contadorEnemigo =0
 let opcionesDeAtaques
+let personaje
+
+let lienzo= mapa.getContext('2d')
 
 class Mokepon{
     constructor(nombre,foto,vida){
         this.nombre = nombre
-        this.foto=foto
-        this.vida=vida
+        this.foto = foto
+        this.vida = vida
         this.ataques = []
+        this.x = 20
+        this.y = 30
+        this.ancho = 80
+        this.alto = 80
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = foto
     }
 }
 
@@ -107,6 +119,7 @@ pydos.ataques.push(
 function iniciarJuego(){
     sectionAtaques.style.display = "none"
     sectionReiniciar.style.display = "none"
+    sectionVerMapa.style.display = "none"
     vidasJugador.innerHTML = contadorJugador
     vidasEnemigo.innerHTML = contadorEnemigo
 
@@ -136,8 +149,9 @@ function iniciarJuego(){
 }
 
 function seleccionMascotaJugador(){
-    sectionAtaques.style.display = ""
+    // sectionAtaques.style.display = ""
     sectionMascotas.style.display = "none"
+    sectionVerMapa.style.display =""
     
     if(inputHipodoge.checked){
         spanMascotaJugador.innerHTML = inputHipodoge.id
@@ -145,6 +159,9 @@ function seleccionMascotaJugador(){
     }else if (inputCapipepo.checked){
         spanMascotaJugador.innerHTML = inputCapipepo.id
         mascotaJugador = inputCapipepo.id
+    }else if (inputRatigueya.checked){
+        spanMascotaJugador.innerHTML = inputRatigueya.id
+        mascotaJugador = inputRatigueya.id
     }else if (inputLangostelvis.checked){
         spanMascotaJugador.innerHTML = inputLangostelvis.id
         mascotaJugador = inputLangostelvis.id
@@ -154,12 +171,15 @@ function seleccionMascotaJugador(){
     }else if (inputPydos.checked){
         spanMascotaJugador.innerHTML = inputPydos.id
         mascotaJugador = inputPydos.id
-    }
-    else {
+    }else {
        alert("debes seleccionar una mascota")
     }
+   
+    
+    
     seleccionarMascotaEnemigo()
     extraerAtaques(mascotaJugador)
+    pintarPersonaje()
     
 }
 
@@ -288,12 +308,37 @@ function finBatalla(){
     sectionReiniciar.style.display = ""
 }
 
-
 function botonReiniciar(){
     location.reload()
 }
+
 function aleatorio (min,max){
     return Math.floor(Math.random()*(max-min+1)+min)
 }
+
+function pintarPersonaje(){
+   
+    for(let i = 0; i<mokepones.length; i++){
+        if(mascotaJugador == mokepones[i].nombre){
+            personaje = mokepones[i]
+        }
+    }
+    lienzo.clearRect(0,0,mapa.width, mapa.height)
+    lienzo.drawImage(
+        personaje.mapaFoto,
+        personaje.x, 
+        personaje.y, 
+        personaje.alto, 
+        personaje.ancho)
+      
+       
+}
+
+function moverPersonaje(){
+    pintarPersonaje()
+    personaje.x = personaje.x + 5
+
+}
+
 
 window.addEventListener("load",iniciarJuego)
