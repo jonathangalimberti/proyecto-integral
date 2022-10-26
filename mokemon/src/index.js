@@ -25,6 +25,8 @@ const subtitulos= document.getElementById('subtitulos')
 const sectionVerMapa = document.getElementById('ver-mapa')
 const mapa = document.getElementById('mapa')
 
+
+
 let ataqueFuego
 let ataqueAgua
 let ataqueTierra
@@ -46,6 +48,9 @@ let contadorJugador =0
 let contadorEnemigo =0
 let opcionesDeAtaques
 let personaje
+let intervalo
+let moverIzqDer=0
+let moverArrAb=0
 
 let lienzo= mapa.getContext('2d')
 
@@ -61,9 +66,13 @@ class Mokepon{
         this.alto = 80
         this.mapaFoto = new Image()
         this.mapaFoto.src = foto
+        this.movimientoX = 5
+        this.movimientoY = 5
     }
 }
 
+let fondo = new Image()
+fondo.src = '/images/mokemap.png'
 let hipodoge = new Mokepon('Hipodoge','/assets/mokepons_mokepon_hipodoge_attack.webp',5)
 let capipepo = new Mokepon('Capipepo','/assets/mokepons_mokepon_capipepo_attack.webp',5)
 let ratigueya = new Mokepon('Ratigueya','/assets/mokepons_mokepon_ratigueya_attack.webp',5)
@@ -152,6 +161,8 @@ function seleccionMascotaJugador(){
     // sectionAtaques.style.display = ""
     sectionMascotas.style.display = "none"
     sectionVerMapa.style.display =""
+
+   iniciarMapa()
     
     if(inputHipodoge.checked){
         spanMascotaJugador.innerHTML = inputHipodoge.id
@@ -175,7 +186,11 @@ function seleccionMascotaJugador(){
        alert("debes seleccionar una mascota")
     }
    
-    
+    for(let i = 0; i<mokepones.length; i++){
+        if(mascotaJugador == mokepones[i].nombre){
+            personaje = mokepones[i]
+        }
+    }
     
     seleccionarMascotaEnemigo()
     extraerAtaques(mascotaJugador)
@@ -317,13 +332,18 @@ function aleatorio (min,max){
 }
 
 function pintarPersonaje(){
+
+   personaje.x = personaje.x + moverIzqDer
+   personaje.y = personaje.y + moverArrAb
+
    
-    for(let i = 0; i<mokepones.length; i++){
-        if(mascotaJugador == mokepones[i].nombre){
-            personaje = mokepones[i]
-        }
-    }
-    lienzo.clearRect(0,0,mapa.width, mapa.height)
+    /* lienzo.clearRect(0,0,mapa.width, mapa.height) */
+    lienzo.drawImage(
+        fondo,
+        0,0,
+        fondo.width,
+        fondo.height
+    )
     lienzo.drawImage(
         personaje.mapaFoto,
         personaje.x, 
@@ -334,10 +354,60 @@ function pintarPersonaje(){
        
 }
 
-function moverPersonaje(){
-    pintarPersonaje()
-    personaje.x = personaje.x + 5
+function moverPersonajeDerecha(){
+    moverIzqDer = personaje.movimientoX
+}
+function moverPersonajeIzquierda(){
+    moverIzqDer = -personaje.movimientoX
+}
+function moverPersonajeArriba(){
+   moverArrAb = -personaje.movimientoY
+}
+function moverPersonajeAbajo(){
+   moverArrAb = personaje.movimientoY
+}
 
+function detenerPersonaje(){
+    moverArrAb = 0
+    moverIzqDer = 0
+}
+
+function sePresionoUnBoton(event){
+
+    
+    switch (event.key) {
+        case 'ArrowUp':
+            moverPersonajeArriba()
+            break;
+        case 'ArrowDown':
+           moverPersonajeAbajo()
+            break;
+        case 'ArrowLeft':
+           moverPersonajeIzquierda()
+            break;
+        case 'ArrowRight':
+           moverPersonajeDerecha()
+            break;
+    
+        default:
+            break;
+    }
+}
+
+function touchPanel(event){
+    console.log(event)
+}
+
+function iniciarMapa(){
+
+    mapa.width = fondo.width
+    mapa.height = fondo.height
+
+    intervalo = setInterval(pintarPersonaje,50)
+
+    window.addEventListener('keydown',sePresionoUnBoton)
+    window.addEventListener('keyup',detenerPersonaje)
+    window.addEventListener('touchmove',touchPanel)
 }
 
 

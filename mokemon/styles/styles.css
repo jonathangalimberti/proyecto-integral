@@ -28,13 +28,36 @@ body{
 }
 #mapa{
     border: 1px solid black;
-}
+   
+    }
+/* canvas{
+    background-image: url('/images/mokemap.png');
+    background-size: auto auto;
+    
+} */
 .titulo-mapa{
     font-family: 'Fredoka One', cursive;
     color: white;
     font-size: 33px;
     font-weight: 300;
     
+}
+
+.botones-mapa{
+    display: flex;
+    width: 241px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.botones-mapa button{
+    width: 36px;
+    height: 25px;
+    font-size: x-large;
+    padding: 0;
+    text-align: center;
+    background: none;
+    border: none;
 }
 .subtitulo{
     color: white;
