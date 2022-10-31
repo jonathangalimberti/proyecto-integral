@@ -4,6 +4,7 @@ body{
     font-family: 'Poppins', sans-serif;
     background-color: #041562;
     font-weight: bold;
+    margin: 0;
 }
 
 #seleccionar-mascota{
@@ -22,6 +23,7 @@ body{
 }
 #ver-mapa{
     display: flex;
+    height: 98vh;
     flex-direction: column;
     align-items: center;
     justify-content: center;

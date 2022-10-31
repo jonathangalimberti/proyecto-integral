@@ -204,7 +204,6 @@ function extraerAtaques(mascotaJugador){
         if (mascotaJugador === mokepones[i].nombre){
             ataques = mokepones[i].ataques
         }
-        
     }
     mostrarAtaques(ataques)
 }
@@ -215,8 +214,6 @@ function mostrarAtaques(ataques){
         opcionesDeAtaques = ` <button id=${mokepon.id} class="boton-de-ataque BAtaque">${mokepon.nombre}</button>`
 
         contenedorAtaques.innerHTML += opcionesDeAtaques
-
-        
     })
     ataqueFuego = document.getElementById("boton-fuego")
     ataqueAgua= document.getElementById("boton-agua")
@@ -355,16 +352,16 @@ function pintarPersonaje(){
 }
 
 function moverPersonajeDerecha(){
-    moverIzqDer = personaje.movimientoX
+   
 }
 function moverPersonajeIzquierda(){
-    moverIzqDer = -personaje.movimientoX
+  
 }
 function moverPersonajeArriba(){
-   moverArrAb = -personaje.movimientoY
+   
 }
 function moverPersonajeAbajo(){
-   moverArrAb = personaje.movimientoY
+   
 }
 
 function detenerPersonaje(){
@@ -373,20 +370,18 @@ function detenerPersonaje(){
 }
 
 function sePresionoUnBoton(event){
-
-    
     switch (event.key) {
         case 'ArrowUp':
-            moverPersonajeArriba()
+            moverArrAb = -personaje.movimientoY
             break;
         case 'ArrowDown':
-           moverPersonajeAbajo()
+            moverArrAb = personaje.movimientoY
             break;
         case 'ArrowLeft':
-           moverPersonajeIzquierda()
+            moverIzqDer = -personaje.movimientoX
             break;
         case 'ArrowRight':
-           moverPersonajeDerecha()
+            moverIzqDer = personaje.movimientoX
             break;
     
         default:
