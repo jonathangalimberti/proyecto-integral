@@ -348,21 +348,9 @@ function pintarPersonaje(){
         personaje.alto, 
         personaje.ancho)
       
-       
+       colisionBordes(mapa)
 }
 
-function moverPersonajeDerecha(){
-   
-}
-function moverPersonajeIzquierda(){
-  
-}
-function moverPersonajeArriba(){
-   
-}
-function moverPersonajeAbajo(){
-   
-}
 
 function detenerPersonaje(){
     moverArrAb = 0
@@ -394,7 +382,6 @@ function touchPanel(event){
 }
 
 function iniciarMapa(){
-
     mapa.width = fondo.width
     mapa.height = fondo.height
 
@@ -404,6 +391,24 @@ function iniciarMapa(){
     window.addEventListener('keyup',detenerPersonaje)
     window.addEventListener('touchmove',touchPanel)
 }
-
+function colisionBordes(mapa){
+    if(personaje.x<= 0 ){
+        detenerPersonaje()
+        personaje.x = 1
+        alert('no puedes pasar de aqui')
+    }else if(personaje.y<=0){
+        detenerPersonaje()
+        personaje.y = 1
+        alert('no puedes pasar de aqui')
+    }else if(personaje.y + personaje.alto >= mapa.height){
+        detenerPersonaje()
+        personaje.y = mapa.height - personaje.alto -1
+        alert('no puedes pasar de aqui')
+    }else if(personaje.x + personaje.ancho >= mapa.width){
+        detenerPersonaje()
+        personaje.x = mapa.width - personaje.ancho -1
+        alert('no puedes pasar de aqui')
+    }
+}
 
 window.addEventListener("load",iniciarJuego)
