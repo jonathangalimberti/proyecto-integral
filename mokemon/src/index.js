@@ -51,23 +51,35 @@ let personaje
 let intervalo
 let moverIzqDer=0
 let moverArrAb=0
+let mokeponesEnemigos =[]
 
 let lienzo= mapa.getContext('2d')
 
 class Mokepon{
-    constructor(nombre,foto,vida){
+    constructor(nombre,foto,vida, x=20, y =30){
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
-        this.x = 20
-        this.y = 30
+        this.x =x
+        this.y =y
         this.ancho = 80
         this.alto = 80
         this.mapaFoto = new Image()
         this.mapaFoto.src = foto
         this.movimientoX = 5
         this.movimientoY = 5
+    }
+    pintarMokepon(){
+        lienzo.drawImage(
+            this.mapaFoto,
+            this.x,
+            this.y,
+            this.ancho,
+            this.alto
+
+
+        )
     }
 }
 
@@ -80,7 +92,15 @@ let langostelvis = new Mokepon('Langostelvis','/assets/mokepons_mokepon_langoste
 let tucapalma = new Mokepon('Tucapalma','/assets/mokepons_mokepon_tucapalma_attack.webp',5)
 let pydos = new Mokepon('Pydos','/assets/mokepons_mokepon_pydos_attack.webp',5)
 
+let hipodogeEnemigo = new Mokepon('Hipodoge','/assets/mokepons_mokepon_hipodoge_attack.webp',5,aleatorio(100,730),aleatorio(0,520))
+let capipepoEnemigo = new Mokepon('Capipepo','/assets/mokepons_mokepon_capipepo_attack.webp',5,aleatorio(100,730),aleatorio(0,520))
+let ratigueyaEnemigo = new Mokepon('Ratigueya','/assets/mokepons_mokepon_ratigueya_attack.webp',5,aleatorio(100,730),aleatorio(0,520))
+let langostelvisEnemigo = new Mokepon('Langostelvis','/assets/mokepons_mokepon_langostelvis_attack.webp',5,aleatorio(100,730),aleatorio(0,520))
+let tucapalmaEnemigo = new Mokepon('Tucapalma','/assets/mokepons_mokepon_tucapalma_attack.webp',5,aleatorio(100,730), aleatorio(0,520)  )
+let pydosEnemigo = new Mokepon('Pydos','/assets/mokepons_mokepon_pydos_attack.webp',5,aleatorio(100,730),aleatorio(0,520))
+
 mokepones.push(hipodoge,capipepo,ratigueya,langostelvis,tucapalma,pydos) 
+mokeponesEnemigos.push(hipodogeEnemigo,capipepoEnemigo,ratigueyaEnemigo,langostelvisEnemigo,tucapalmaEnemigo,pydosEnemigo) 
 
 hipodoge.ataques.push(
     {nombre: '💧 AGUA', id:'boton-agua'},
@@ -195,7 +215,6 @@ function seleccionMascotaJugador(){
     seleccionarMascotaEnemigo()
     extraerAtaques(mascotaJugador)
     pintarPersonaje()
-    
 }
 
 function extraerAtaques(mascotaJugador){
@@ -333,20 +352,25 @@ function pintarPersonaje(){
    personaje.x = personaje.x + moverIzqDer
    personaje.y = personaje.y + moverArrAb
 
-   
-    /* lienzo.clearRect(0,0,mapa.width, mapa.height) */
     lienzo.drawImage(
         fondo,
         0,0,
         fondo.width,
         fondo.height
     )
+    for(let i =0 ; i <mokeponesEnemigos.length; i++){
+     mokeponesEnemigos[i].pintarMokepon()}
+
+     colisionEntreEnemigos(mokeponesEnemigos)
+
     lienzo.drawImage(
         personaje.mapaFoto,
         personaje.x, 
         personaje.y, 
         personaje.alto, 
         personaje.ancho)
+
+       
       
        colisionBordes(mapa)
 }
@@ -391,6 +415,7 @@ function iniciarMapa(){
     window.addEventListener('keyup',detenerPersonaje)
     window.addEventListener('touchmove',touchPanel)
 }
+
 function colisionBordes(mapa){
     if(personaje.x<= 0 ){
         detenerPersonaje()
@@ -408,6 +433,21 @@ function colisionBordes(mapa){
         detenerPersonaje()
         personaje.x = mapa.width - personaje.ancho -1
         alert('no puedes pasar de aqui')
+    }
+}
+
+function colisionEntreEnemigos(mokeponesEnemigos){
+    for (i = 1; i <mokeponesEnemigos.length;i++){
+        
+        if(mokeponesEnemigos[i].x + mokeponesEnemigos[i].ancho < mokeponesEnemigos[i-1].x ||
+            mokeponesEnemigos[i].y + mokeponesEnemigos[i].alto < mokeponesEnemigos[i-1].y ||
+            mokeponesEnemigos[i].y > mokeponesEnemigos[i-1].y + mokeponesEnemigos[i-1].alto||
+            mokeponesEnemigos[i].x > mokeponesEnemigos[i-1].x + mokeponesEnemigos[i-1].ancho){
+            }else{
+
+                mokeponesEnemigos[i].x=aleatorio(100,730)
+                mokeponesEnemigos[i].y =aleatorio(0,520)
+            }
     }
 }
 
