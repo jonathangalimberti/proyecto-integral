@@ -141,6 +141,8 @@ body{
     display: flex;
     flex-direction: column;
     margin:24px;
+    
+
 }
 
 #mensajes{
@@ -174,6 +176,9 @@ body{
     background: lightblue;
     padding: 20px;
     border-radius: 20px;
+    width: 300px;
+    text-align: center;
+    
 }
 
 .padre-ataques{

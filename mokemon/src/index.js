@@ -50,8 +50,16 @@ let intervalo
 let moverIzqDer=0
 let moverArrAb=0
 let mokeponesEnemigos =[]
+let fondo = new Image()
+fondo.src = '/images/mokemap.png'
+let anchoFondo 
+let altoFondo 
+
 
 let lienzo= mapa.getContext('2d')
+
+
+
 
 class Mokepon{
     constructor(nombre,foto,vida, x=20, y =30){
@@ -75,14 +83,12 @@ class Mokepon{
             this.y,
             this.ancho,
             this.alto
-
-
         )
     }
 }
 
-let fondo = new Image()
-fondo.src = '/images/mokemap.png'
+
+
 let hipodoge = new Mokepon('Hipodoge','/assets/mokepons_mokepon_hipodoge_attack.webp',5)
 let capipepo = new Mokepon('Capipepo','/assets/mokepons_mokepon_capipepo_attack.webp',5)
 let ratigueya = new Mokepon('Ratigueya','/assets/mokepons_mokepon_ratigueya_attack.webp',5)
@@ -171,6 +177,7 @@ function iniciarJuego(){
     })
     reiniciar.addEventListener("click",botonReiniciar)
     botonMascotaJugador.addEventListener("click",seleccionMascotaJugador)
+    
 }
 
 function seleccionMascotaJugador(){
@@ -275,7 +282,10 @@ function resultadoCombate(){
         contadorEnemigo= contadorEnemigo+1;
     }
     if ( ataqueJugador.length == 5){
-        crearMensaje()
+      
+        
+           crearMensaje()
+      
     }
 }
 
@@ -283,14 +293,15 @@ function crearMensaje(){
     let nuevoAtaqueJugador = document.createElement("p")
     let nuevoAtaqueEnemigo = document.createElement("p")
     
-    sectionResultado.innerHTML = resultado
-    for (let i = 0; i < seleccionEnemigo.length; i++) {
-        nuevoAtaqueEnemigo.innerHTML += seleccionEnemigo[i];
-    }
-    for (let i = 0; i < ataqueJugador.length; i++) {
-        nuevoAtaqueJugador.innerHTML += ataqueJugador[i];
-    }
+    setTimeout(()=>{
 
+        for (let i = 0; i < seleccionEnemigo.length; i++) {
+        nuevoAtaqueEnemigo.innerHTML += seleccionEnemigo[i];
+        nuevoAtaqueJugador.innerHTML += ataqueJugador[i];
+        }
+    },1000)
+    
+    
     sectionAtaqueJugador.appendChild(nuevoAtaqueJugador)
     sectionAtaqueEnemigo.appendChild(nuevoAtaqueEnemigo)
     contadorVidas()
@@ -300,9 +311,13 @@ function contadorVidas(){
     mensajesFinales.style.display=''
     contenedorAtaques.style.display='none'
     subtitulos.style.display='none'
+    setTimeout(() => {
+        
+        // sectionResultado.innerHTML = resultado
         vidasJugador.innerHTML = contadorJugador
         vidasEnemigo.innerHTML = contadorEnemigo
-    finBatalla()
+        finBatalla()
+    }, 1500);
 }
 
 function finBatalla(){
@@ -323,10 +338,15 @@ function botonReiniciar(){
 function aleatorio (min,max){
     return Math.floor(Math.random()*(max-min+1)+min)
 }
-
 function pintarPersonaje(){
+    
+    // if (fondo.width > window.innerWidth){
+    //  fondo.width = (window.innerWidth)*100/800
+    //  fondo.height = (window.innerWidth)*600/800
+    // }
    personaje.x = personaje.x + moverIzqDer
    personaje.y = personaje.y + moverArrAb
+
 
     lienzo.drawImage(
         fondo,
@@ -352,6 +372,19 @@ function pintarPersonaje(){
 function detenerPersonaje(){
     moverArrAb = 0
     moverIzqDer = 0
+}
+
+function moverPersonajeIzquierda(){
+    moverIzqDer = -personaje.movimientoX
+}
+function moverPersonajeDerecha(){
+    moverIzqDer = personaje.movimientoX
+}
+function moverPersonajeArriba(){
+    moverArrAb = -personaje.movimientoY
+}
+function moverPersonajeAbajo(){
+    moverArrAb = personaje.movimientoY
 }
 
 function sePresionoUnBoton(event){
