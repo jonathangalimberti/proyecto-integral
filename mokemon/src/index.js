@@ -212,7 +212,7 @@ function seleccionMascotaJugador(){
         }
     }
     
-    seleccionarMascotaEnemigo()
+    // seleccionarMascotaEnemigo()
     extraerAtaques(mascotaJugador)
     pintarPersonaje()
 }
@@ -234,6 +234,8 @@ function mostrarAtaques(ataques){
 
         contenedorAtaques.innerHTML += opcionesDeAtaques
     })
+
+    subtitulos.innerHTML = `Elige los ataques de ${mascotaJugador}`
     ataqueFuego = document.getElementById("boton-fuego")
     ataqueAgua= document.getElementById("boton-agua")
     ataqueTierra= document.getElementById("boton-tierra")
@@ -249,18 +251,15 @@ function secuenciaAtaques(){
         boton.addEventListener('click',(e) =>{
             if(e.target.textContent === '🔥 FUEGO'){
                 ataqueJugador.push('🔥 FUEGO')
-                console.log(ataqueJugador)
                 boton.style.background = 'grey'
                 boton.disabled =true
                 
             }else if (e.target.textContent === '💧 AGUA') {
                 ataqueJugador.push('💧 AGUA')
-                console.log(ataqueJugador)
                 boton.style.background = 'grey'
                 boton.disabled =true
             }else if (e.target.textContent === '🪴 TIERRA') {
                 ataqueJugador.push('🪴 TIERRA')
-                console.log(ataqueJugador)
                 boton.style.background = 'grey'}
                 boton.disabled =true
                 ataqueAleatorioEnemigo()
@@ -271,8 +270,8 @@ function secuenciaAtaques(){
 function seleccionarMascotaEnemigo(){
     let mascotaEnemigo = aleatorio(0, (mokepones.length-1))
 
-        spanMascotaEnemigo.innerHTML = mokepones[mascotaEnemigo].nombre
-        ataqueEnemigo = mokepones[mascotaEnemigo].ataques
+        // spanMascotaEnemigo.innerHTML = mokepones[mascotaEnemigo].nombre
+        // ataqueEnemigo = mokepones[mascotaEnemigo].ataques
 
 }
 
@@ -373,8 +372,8 @@ function pintarPersonaje(){
        
       
        colisionBordes(mapa)
+       colisionMokepones()
 }
-
 
 function detenerPersonaje(){
     moverArrAb = 0
@@ -447,6 +446,23 @@ function colisionEntreEnemigos(mokeponesEnemigos){
 
                 mokeponesEnemigos[i].x=aleatorio(100,730)
                 mokeponesEnemigos[i].y =aleatorio(0,520)
+            }
+    }
+}
+
+function colisionMokepones(){
+    for(i=0; i<mokeponesEnemigos.length;i++){
+        if(personaje.x + personaje.ancho < mokeponesEnemigos[i].x ||
+            personaje.y + personaje.alto < mokeponesEnemigos[i].y ||
+            personaje.y > mokeponesEnemigos[i].y + mokeponesEnemigos[i].alto||
+            personaje.x > mokeponesEnemigos[i].x + mokeponesEnemigos[i].ancho){
+               
+            }else{
+                detenerPersonaje()
+                sectionAtaques.style.display = ""
+                sectionVerMapa.style.display ="none"
+                spanMascotaEnemigo.innerHTML = mokepones[i].nombre
+                ataqueEnemigo = mokepones[i].ataques
             }
     }
 }
