@@ -25,8 +25,6 @@ const subtitulos= document.getElementById('subtitulos')
 const sectionVerMapa = document.getElementById('ver-mapa')
 const mapa = document.getElementById('mapa')
 
-
-
 let ataqueFuego
 let ataqueAgua
 let ataqueTierra
@@ -171,14 +169,11 @@ function iniciarJuego(){
              inputTucapalma= document.getElementById("Tucapalma")
              inputPydos= document.getElementById("Pydos")
     })
-    
     reiniciar.addEventListener("click",botonReiniciar)
     botonMascotaJugador.addEventListener("click",seleccionMascotaJugador)
-   
 }
 
 function seleccionMascotaJugador(){
-    // sectionAtaques.style.display = ""
     sectionMascotas.style.display = "none"
     sectionVerMapa.style.display =""
 
@@ -211,8 +206,6 @@ function seleccionMascotaJugador(){
             personaje = mokepones[i]
         }
     }
-    
-    // seleccionarMascotaEnemigo()
     extraerAtaques(mascotaJugador)
     pintarPersonaje()
 }
@@ -228,10 +221,8 @@ function extraerAtaques(mascotaJugador){
 }
 
 function mostrarAtaques(ataques){
-    
     ataques.forEach(mokepon =>{
         opcionesDeAtaques = ` <button id=${mokepon.id} class="boton-de-ataque BAtaque">${mokepon.nombre}</button>`
-
         contenedorAtaques.innerHTML += opcionesDeAtaques
     })
 
@@ -240,7 +231,6 @@ function mostrarAtaques(ataques){
     ataqueAgua= document.getElementById("boton-agua")
     ataqueTierra= document.getElementById("boton-tierra")
     botones= document.querySelectorAll('.BAtaque')
-    
     mensajesFinales.style.display='none'
     secuenciaAtaques()
 }
@@ -267,21 +257,11 @@ function secuenciaAtaques(){
         })
 }
 
-function seleccionarMascotaEnemigo(){
-    let mascotaEnemigo = aleatorio(0, (mokepones.length-1))
-
-        // spanMascotaEnemigo.innerHTML = mokepones[mascotaEnemigo].nombre
-        // ataqueEnemigo = mokepones[mascotaEnemigo].ataques
-
-}
-
 function ataqueAleatorioEnemigo(){
     let eleccionEnemigo = aleatorio(0,ataqueEnemigo.length-1)
     seleccionEnemigo.push(ataqueEnemigo[eleccionEnemigo].nombre)
     ataqueEnemigo.splice(eleccionEnemigo,1)
-
     resultadoCombate()
-    
 }
 
 function resultadoCombate(){
@@ -311,10 +291,8 @@ function crearMensaje(){
         nuevoAtaqueJugador.innerHTML += ataqueJugador[i];
     }
 
-
     sectionAtaqueJugador.appendChild(nuevoAtaqueJugador)
     sectionAtaqueEnemigo.appendChild(nuevoAtaqueEnemigo)
-    
     contadorVidas()
 }
 
@@ -347,7 +325,6 @@ function aleatorio (min,max){
 }
 
 function pintarPersonaje(){
-
    personaje.x = personaje.x + moverIzqDer
    personaje.y = personaje.y + moverArrAb
 
@@ -358,10 +335,9 @@ function pintarPersonaje(){
         fondo.height
     )
     for(let i =0 ; i <mokeponesEnemigos.length; i++){
-     mokeponesEnemigos[i].pintarMokepon()}
-
+     mokeponesEnemigos[i].pintarMokepon()
+    }
      colisionEntreEnemigos(mokeponesEnemigos)
-
     lienzo.drawImage(
         personaje.mapaFoto,
         personaje.x, 
@@ -369,8 +345,6 @@ function pintarPersonaje(){
         personaje.alto, 
         personaje.ancho)
 
-       
-      
        colisionBordes(mapa)
        colisionMokepones()
 }
@@ -394,7 +368,6 @@ function sePresionoUnBoton(event){
         case 'ArrowRight':
             moverIzqDer = personaje.movimientoX
             break;
-    
         default:
             break;
     }
@@ -437,13 +410,11 @@ function colisionBordes(mapa){
 
 function colisionEntreEnemigos(mokeponesEnemigos){
     for (i = 1; i <mokeponesEnemigos.length;i++){
-        
         if(mokeponesEnemigos[i].x + mokeponesEnemigos[i].ancho < mokeponesEnemigos[i-1].x ||
             mokeponesEnemigos[i].y + mokeponesEnemigos[i].alto < mokeponesEnemigos[i-1].y ||
             mokeponesEnemigos[i].y > mokeponesEnemigos[i-1].y + mokeponesEnemigos[i-1].alto||
             mokeponesEnemigos[i].x > mokeponesEnemigos[i-1].x + mokeponesEnemigos[i-1].ancho){
             }else{
-
                 mokeponesEnemigos[i].x=aleatorio(100,730)
                 mokeponesEnemigos[i].y =aleatorio(0,520)
             }
@@ -456,7 +427,6 @@ function colisionMokepones(){
             personaje.y + personaje.alto < mokeponesEnemigos[i].y ||
             personaje.y > mokeponesEnemigos[i].y + mokeponesEnemigos[i].alto||
             personaje.x > mokeponesEnemigos[i].x + mokeponesEnemigos[i].ancho){
-               
             }else{
                 detenerPersonaje()
                 sectionAtaques.style.display = ""
