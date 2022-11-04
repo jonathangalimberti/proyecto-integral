@@ -25,6 +25,7 @@ const subtitulos= document.getElementById('subtitulos')
 const sectionVerMapa = document.getElementById('ver-mapa')
 const mapa = document.getElementById('mapa')
 
+let jugadorId = null
 let ataqueFuego
 let ataqueAgua
 let ataqueTierra
@@ -189,6 +190,7 @@ function unirseAlJuego(){
                 res.text()
                     .then(function(respuesta){
                         console.log(respuesta)
+                        jugadorId = respuesta
                     })
             }
 
@@ -231,6 +233,20 @@ function seleccionMascotaJugador(){
     }
     extraerAtaques(mascotaJugador)
     pintarPersonaje()
+    seleccionMokepon(mascotaJugador)
+}
+
+function seleccionMokepon(mascotaJugador){
+    fetch(`http://localhost:8080/mokepon/${jugadorId}`,{
+        method: 'post',
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify({
+            mokepon:mascotaJugador
+        })
+    })
+   
 }
 
 function extraerAtaques(mascotaJugador){
